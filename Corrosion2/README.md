@@ -145,7 +145,7 @@ Thực hiện câu lệnh `ls -la` để xem chi tiết tất cả tệp tin:
 
 ![image](https://github.com/user-attachments/assets/02e31a5f-dc2b-4e8b-a575-970f5f8887a2)
 
-Phát hiện thư mục `Files ` thuộc sở hữu và thực thi bởi root, điêu hướng tới thư mục:
+Phát hiện thư mục `Files ` thuộc sở hữu và thực thi bởi root, điều hướng tới thư mục:
 
 ![image](https://github.com/user-attachments/assets/387b36a9-c5eb-4ca2-8f3f-bb9e1849d463)
 
@@ -182,7 +182,7 @@ Có 4 cách để thực hiện leo thang đặc quyền:
   - B3: Leo quyền
 
 
-- Thông qua Kernel Exploit: `uname -a`
+### Thông qua Kernel Exploit: `uname -a`
 
 ![image](https://github.com/user-attachments/assets/fda822bf-c3e0-443c-bcef-98b3c5c1eb69)
 
@@ -208,8 +208,7 @@ Thực thi tệp khai thác với bất kì SUID nào ta thu được kết qu�
 
 ![image](https://github.com/user-attachments/assets/39078620-5927-46d7-9b08-453e2afda78e)
 
-
-- Leo thang đặc quyền bằng cách kiểm tra giới hạn của người dùng `sudo -l`:
+### Leo thang đặc quyền bằng cách kiểm tra giới hạn của người dùng `sudo -l`:
 
 Sử dụng `ssh` để loggin tài khoản user `randy` và tiến hành khai thác:
 
