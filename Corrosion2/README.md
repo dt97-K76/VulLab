@@ -112,9 +112,39 @@ Vì trước đó tìm được thông tin xác thực hợp lệ (username và 
     set HttpUsername admin
     set HttpPassword melehifokivai
 
-![image](https://github.com/user-attachments/assets/371ad4ad-933c-4f50-91e1-a373c8c6af01)
+![image](https://github.com/user-attachments/assets/91429076-ecac-47af-a844-5223a57de154)
 
-Khai thác thành công. Tạo được session tới mục tiêu:
+Khai thác thành công. Tạo được session tới mục tiêu. Tạo shell đến OS đến thực hiện bước khác thác tiếp theo:
+
+![image](https://github.com/user-attachments/assets/6e909d3c-4909-4174-8758-a0029a01b865)
+
+Tạo shell thành công, nhưng trước tiên cần ổn định nó đã:
+
+        python3 -c 'import pty;pty.spawn("/bin/bash")'
+        export TERM=xterm
+
+![image](https://github.com/user-attachments/assets/96e054a7-73f2-449e-94fd-b5e0e81d73b6)
+
+
+Thử đăng nhập với tư cách user: tomcat nhưng thất bại. 
+
+![image](https://github.com/user-attachments/assets/4f383cca-01fa-4438-a52b-4f4954e20140)
+
+Tìm các user khác tại `/home`. Phát hiện thêm `randy` và `jaye`
+
+![image](https://github.com/user-attachments/assets/42e4f309-44f3-4f25-b248-f06fa45c77e7)
+
+![image](https://github.com/user-attachments/assets/de7be083-5f9a-4667-bf21-0b0fa795a953)
+
+Thành công đăng nhập với tư cách `jaye`.
+
+
+
+
+
+
+
+
 
 
 
