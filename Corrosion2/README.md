@@ -138,6 +138,32 @@ Tìm các user khác tại `/home`. Phát hiện thêm `randy` và `jaye`
 
 Thành công đăng nhập với tư cách `jaye`.
 
+Sử dụng tài khoản user `jaye` tìm được ở trên tiến hành leo thang đặc quyền theo cách khác:
+
+![image](https://github.com/user-attachments/assets/85e7d0ed-2f19-4c87-a5a2-98573ad1b184)
+
+Thử liền kê quyền hạn thực thi của user jaye, điều này không mang lại kết quả:
+
+![image](https://github.com/user-attachments/assets/705e86d5-b7ce-4099-bb93-0aa6cfcb077a)
+
+Thực hiện câu lệnh `ls -la` để xem chi tiết tất cả tệp tin:
+
+![image](https://github.com/user-attachments/assets/02e31a5f-dc2b-4e8b-a575-970f5f8887a2)
+
+Phát hiện thư mục `Files ` thuộc sở hữu và thực thi bởi root, điêu hướng tới thư mục:
+
+![image](https://github.com/user-attachments/assets/387b36a9-c5eb-4ca2-8f3f-bb9e1849d463)
+
+Thực thi `look` ta có thể đọc được file `/etc/shadow` chứa tài khoản của user như root.
+
+Giải mã các `hash` này để tìm password của root, randy và tomcat, sử dụng công cụ `john`:
+
+    john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Kết qủa chỉ tìm được mật khẩu của user `randy` -- `07051986randy`
+
+![image](https://github.com/user-attachments/assets/8af6bd84-0044-431c-b1ee-b61a351efaf8)
+
+
 # Privilege Escalation
 
 Có 4 cách để thực hiện leo thang đặc quyền:
@@ -177,7 +203,7 @@ Tải và biên dịch tệp thực thi để tiến hành exploit:
 
 Trước khi exploit:
 
-![image](https://github.com/user-attachments/assets/80e0fbb3-ca1a-455a-8391-0a323cfb2dbb)
+![image](https://github.com/user-attachments/assets/da61c303-a8bc-4837-b09b-5d6ee4ce2d08)
 
 Tìm các file SUID sử dụng câu lệnh: `find / -perm -u=s -type f 2>/dev/null`
 
@@ -185,7 +211,40 @@ Tìm các file SUID sử dụng câu lệnh: `find / -perm -u=s -type f 2>/dev/n
 
 Thực thi tệp khai thác với bất kì SUID nào ta thu được kết quả:
 
-![image](https://github.com/user-attachments/assets/4f456e73-5c5e-4d07-a693-376073a9a1ae)
+![image](https://github.com/user-attachments/assets/39078620-5927-46d7-9b08-453e2afda78e)
+
+
+- Leo thang đặc quyền bằng cách kiểm tra giới hạn của người dùng `sudo -l`:
+
+Sử dụng `ssh` để loggin tài khoản user randy` và tiến hành khai thác:
+
+![image](https://github.com/user-attachments/assets/bb7b5de1-027c-4faf-b404-646d4d1c63cb)
+
+![image](https://github.com/user-attachments/assets/e66ff7bb-a090-4a3d-b04f-944e0e055d7f)
+
+`/home/randy/randombase64.py` có thể bị khai thác để nâng cao đặc quyền:
+
+![image](https://github.com/user-attachments/assets/0736cb12-a692-495d-91b6-bb2209c289f4)
+
+Để có được vị trí tệp base64, tôi sử dụng lệnh `locate`. Trong vài giây, tôi phát hiện ra tọa độ của nó. Tôi đã điều tra các hạn chế của tệp. Sử dụng tập tin này, chúng ta có thể có quyền truy cập root.
+
+    locate base64
+    ls -la /usr/lib/python3.8/base64.py
+
+![image](https://github.com/user-attachments/assets/1b4fa2e3-3371-4e66-bd24-2625ee95e984)
+
+Tôi đã thực hiện một số thay đổi đối với tệp python base64 này bằng lệnh `nano`. Thêm mã này để có quyền truy cập root vào máy của nạn nhân.
+
+    import os
+    os.system ("/bin/bash")
+
+
+
+
+
+
+
+
 
 
 
