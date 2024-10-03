@@ -120,8 +120,8 @@ Khai thác thành công. Tạo được session tới mục tiêu. Tạo shell �
 
 Tạo shell thành công, nhưng trước tiên cần ổn định nó đã:
 
-        python3 -c 'import pty;pty.spawn("/bin/bash")'
-        export TERM=xterm
+    python3 -c 'import pty;pty.spawn("/bin/bash")'
+    export TERM=xterm
 
 ![image](https://github.com/user-attachments/assets/96e054a7-73f2-449e-94fd-b5e0e81d73b6)
 
@@ -137,6 +137,68 @@ Tìm các user khác tại `/home`. Phát hiện thêm `randy` và `jaye`
 ![image](https://github.com/user-attachments/assets/de7be083-5f9a-4667-bf21-0b0fa795a953)
 
 Thành công đăng nhập với tư cách `jaye`.
+
+# Privilege Escalation
+
+Có 4 cách để thực hiện leo thang đặc quyền:
+- Thông qua File Permission: Leo thang đặc quyền thông qua việc cấu hình sai về quyền SUID của files.
+  - B1: Tìm kiếm các file có quyền SUID
+  
+        find / -type f -perm +4000 -ls 2>/dev/null
+  - B2: Lựa chọn file để tận dụng leo quyền
+  - B3: Thực hiện khai thác
+- Thông qua Scheduled Task: Leo thang đặc quyền thông qua việc cấu hình sai về quyền SUID của files.
+  - B1: Tìm kiếm các scheduled task: Trong linux, ta có thể quan sát các cron jobs thông qua file cấu hình /etc/crontab
+  - B2: Lựa chọn cronjob
+  - B3: Thực hiện leo quyền
+- Thông qua Kernel Exploit
+  - B1: Thu thập thông tin về kernel: `uname -a` hoặc `cat /proc/version` để lấy version của hệ thống
+  - B2: Tìm kiếm public exploit
+  - B3: Thực hiện leo quyền
+- Giới hạn của người dùng: dựa vào config của Sudoers file, từ việc chỉ có thể thực thi sudo với những lệnh hạn chế, có thể leo thang đặc quyền để có được quyền Root.
+  - B1: Liệt kê quyền hạn: `sudo -l`
+  - B2: Lựa chọn quyền hạn thực thi để tận dụng leo quyền
+  - B3: Leo quyền
+
+
+- Thông qua Kernel Exploit: `uname -a`
+
+![image](https://github.com/user-attachments/assets/fda822bf-c3e0-443c-bcef-98b3c5c1eb69)
+
+Xác định được phiên bản kernel `5.11.0-34-generic`. Sử dụng `searchsploit` để tìm cách khai thác nhưng không có:
+
+![image](https://github.com/user-attachments/assets/69258983-1fa7-4744-acfc-da62e81a6250)
+
+Tìm kiếm có được thông tin liên quan về 5.11.0-34-generic, đó là lỗ hỏng bảo mật `CVE-2022-0847`:
+
+![image](https://github.com/user-attachments/assets/c9667a3c-2708-440e-a8fd-96db3462ba3b)
+
+Tải và biên dịch tệp thực thi để tiến hành exploit:
+
+Trước khi exploit:
+
+![image](https://github.com/user-attachments/assets/80e0fbb3-ca1a-455a-8391-0a323cfb2dbb)
+
+Tìm các file SUID sử dụng câu lệnh: `find / -perm -u=s -type f 2>/dev/null`
+
+![image](https://github.com/user-attachments/assets/393726ef-f18f-4955-b49f-5b7e2503ba5c)
+
+Thực thi tệp khai thác với bất kì SUID nào ta thu được kết quả:
+
+![image](https://github.com/user-attachments/assets/4f456e73-5c5e-4d07-a693-376073a9a1ae)
+
+
+
+
+
+
+
+
+
+
+  
+ 
+
 
 
 
