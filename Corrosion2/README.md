@@ -1,3 +1,6 @@
+# Corrosion: 2 VulnHub WriteUp
+## Link downloads: https://download.vulnhub.com/corrosion/Corrosion2.ova
+
 # Tool
 
 ## Network Scanning
@@ -138,14 +141,6 @@ Tìm các user khác tại `/home`. Phát hiện thêm `randy` và `jaye`
 
 Thành công đăng nhập với tư cách `jaye`.
 
-Sử dụng tài khoản user `jaye` tìm được ở trên tiến hành leo thang đặc quyền theo cách khác:
-
-![image](https://github.com/user-attachments/assets/85e7d0ed-2f19-4c87-a5a2-98573ad1b184)
-
-Thử liền kê quyền hạn thực thi của user jaye, điều này không mang lại kết quả:
-
-![image](https://github.com/user-attachments/assets/705e86d5-b7ce-4099-bb93-0aa6cfcb077a)
-
 Thực hiện câu lệnh `ls -la` để xem chi tiết tất cả tệp tin:
 
 ![image](https://github.com/user-attachments/assets/02e31a5f-dc2b-4e8b-a575-970f5f8887a2)
@@ -216,7 +211,7 @@ Thực thi tệp khai thác với bất kì SUID nào ta thu được kết qu�
 
 - Leo thang đặc quyền bằng cách kiểm tra giới hạn của người dùng `sudo -l`:
 
-Sử dụng `ssh` để loggin tài khoản user randy` và tiến hành khai thác:
+Sử dụng `ssh` để loggin tài khoản user `randy` và tiến hành khai thác:
 
 ![image](https://github.com/user-attachments/assets/bb7b5de1-027c-4faf-b404-646d4d1c63cb)
 
