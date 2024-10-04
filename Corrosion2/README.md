@@ -165,7 +165,7 @@ Có 4 cách để thực hiện leo thang đặc quyền:
 - Thông qua File Permission: Leo thang đặc quyền thông qua việc cấu hình sai về quyền SUID của files.
   - B1: Tìm kiếm các file có quyền SUID
   
-        find / -type f -perm +4000 -ls 2>/dev/null
+        find / -type f -perm /4000 -ls 2>/dev/null
   - B2: Lựa chọn file để tận dụng leo quyền
   - B3: Thực hiện khai thác
 - Thông qua Scheduled Task: Leo thang đặc quyền thông qua việc cấu hình sai về quyền SUID của files.
